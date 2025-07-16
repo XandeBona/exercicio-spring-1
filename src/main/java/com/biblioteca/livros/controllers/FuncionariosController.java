@@ -1,14 +1,12 @@
 package com.biblioteca.livros.controllers;
 
 import com.biblioteca.livros.entities.Funcionario;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/funcionarios")
@@ -41,6 +39,36 @@ public class FuncionariosController {
 
             }
         }
-    return null;
+        return null;
+    }
+
+    @PostMapping
+    public Funcionario adicionarFuncionario(@RequestBody Funcionario funcionario) {
+        funcionario.setId(new Random().nextInt());
+        lista.add(funcionario);
+        return funcionario;
+    }
+
+    @PutMapping("/{idFuncionario}")
+    public Funcionario alterarFuncionario(@PathVariable Integer idFuncionario, @RequestBody Funcionario funcionario) {
+        for (Funcionario funcionarioAlterar : lista) {
+            if (funcionarioAlterar.getId().equals(idFuncionario)) {
+                funcionarioAlterar.setNome(funcionario.getNome());
+                funcionarioAlterar.setCpf(funcionario.getCpf());
+                return funcionarioAlterar;
+            }
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{idFuncionario}")
+    public Funcionario deletarFuncionario(@PathVariable Integer idFuncionario) {
+        for (Funcionario funcionarioRemover : lista) {
+            if (funcionarioRemover.getId().equals(idFuncionario)) {
+                lista.remove(funcionarioRemover);
+                return funcionarioRemover;
+            }
+        }
+        return null;
     }
 }

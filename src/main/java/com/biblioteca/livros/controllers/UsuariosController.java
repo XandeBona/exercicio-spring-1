@@ -1,17 +1,16 @@
 package com.biblioteca.livros.controllers;
 
+import com.biblioteca.livros.entities.Funcionario;
 import com.biblioteca.livros.entities.Usuario;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/usuarios")
 public class UsuariosController {
     private List<Usuario> lista;
 
@@ -35,10 +34,42 @@ public class UsuariosController {
     @GetMapping("/{idUsuario}")
     public Usuario buscarUsuario(@PathVariable Integer idUsuario) {
         for (Usuario usuario : lista) {
-            if(Objects.equals(usuario.getId(), idUsuario)) {
+            if (Objects.equals(usuario.getId(), idUsuario)) {
                 return usuario;
             }
         }
         return null;
     }
+
+    @PostMapping
+    public Usuario adicionarUsuario(@RequestBody Usuario usuario) {
+        usuario.setId(new Random().nextInt());
+        lista.add(usuario);
+        return usuario;
+    }
+
+    @PutMapping("/{idUsuario}")
+    public Usuario alterarUsuario(@PathVariable Integer idUsuario, @RequestBody Usuario usuario) {
+        for (Usuario usuarioAlterar : lista) {
+            if (usuarioAlterar.getId().equals(idUsuario)) {
+                usuarioAlterar.setNome(usuario.getNome());
+                usuarioAlterar.setCpf(usuario.getCpf());
+                usuarioAlterar.setQtdLivros(usuario.getQtdLivros());
+                return usuarioAlterar;
+            }
+        }
+        return null;
+    }
+
+    @DeleteMapping("/{idUsuario}")
+    public Usuario deletarUsuario(@PathVariable Integer idUsuario) {
+        for (Usuario usuarioRemover : lista) {
+            if (usuarioRemover.getId().equals(idUsuario)) {
+                lista.remove(usuarioRemover);
+                return usuarioRemover;
+            }
+        }
+        return null;
+    }
 }
+

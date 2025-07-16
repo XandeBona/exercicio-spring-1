@@ -4,13 +4,13 @@ public class Usuario {
     private Integer id;
     private String nome;
     private String cpf;
-    private Integer qtd_Livros;
+    private Integer qtdLivros;
 
     public Usuario(Integer id, String nome, String cpf, Integer qtd_Livros) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
-        this.qtd_Livros = qtd_Livros;
+        this.qtdLivros = qtd_Livros;
     }
 
     public Integer getId() {
@@ -25,7 +25,23 @@ public class Usuario {
         return cpf;
     }
 
-    public Integer getQtd_Livros() {
-        return qtd_Livros;
+    public Integer getQtdLivros() {
+        return qtdLivros;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setQtdLivros(Integer qtdLivros) {
+        this.qtdLivros = qtdLivros;
     }
 }
