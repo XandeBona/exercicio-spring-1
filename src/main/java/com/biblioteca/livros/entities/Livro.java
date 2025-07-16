@@ -3,12 +3,12 @@ package com.biblioteca.livros.entities;
 public class Livro {
     private Integer id;
     private String nome;
-    private Integer qtd_paginas;
+    private Integer qtdPaginas;
 
-    public Livro(Integer id, String nome, Integer qtd_paginas) {
+    public Livro(Integer id, String nome, Integer qtdPaginas) {
         this.id = id;
         this.nome = nome;
-        this.qtd_paginas = qtd_paginas;
+        this.qtdPaginas = qtdPaginas;
     }
 
     public Integer getId() {
@@ -19,7 +19,19 @@ public class Livro {
         return nome;
     }
 
-    public Integer getQtd_paginas() {
-        return qtd_paginas;
+    public Integer getQtdPaginas() {
+        return qtdPaginas;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setQtdPaginas(Integer qtdPaginas) {
+        this.qtdPaginas = qtdPaginas;
     }
 }
